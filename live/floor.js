@@ -13,11 +13,15 @@ import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 
-const stage = document.querySelector(".floor .stage");
-const section = document.getElementById("floor");
-const poster = document.querySelector(".floor .poster");
-const canvas = document.getElementById("gl");
-const isSmall = window.innerWidth < 900;
+// Embed mode: the home page mounts the same floor inside its hero window and passes the elements in
+// window.TELOSON_FLOOR = { embed:true, stage, canvas, poster, labels, lite }. Without it, this is /live.
+const cfg = window.TELOSON_FLOOR || {};
+const embed = !!cfg.embed;
+const stage = cfg.stage || document.querySelector(".floor .stage");
+const section = cfg.section || stage.closest("section") || document.getElementById("floor");
+const poster = cfg.poster || document.querySelector(".floor .poster");
+const canvas = cfg.canvas || document.getElementById("gl");
+const isSmall = embed ? !!cfg.lite : window.innerWidth < 900;
 const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // ---------- the roster (from src/agents/roster.js) ----------
@@ -489,10 +493,14 @@ if ("ResizeObserver" in window) new ResizeObserver(size).observe(stage);
 // ---------- the walk down the aisle ----------
 // Start at the head of the floor, eye height, looking down the aisle with the room to the right of
 // the copy. Then walk forward. Then arrive at your desk.
-const CAM = isSmall
+const CAM = embed
+  ? [new THREE.Vector3(0.1, 2.05, 6.8), new THREE.Vector3(0.3, 1.75, -6.5), new THREE.Vector3(-0.5, 1.6, CLIENT_Z + 5.6)]
+  : isSmall
   ? [new THREE.Vector3(-0.4, 2.9, 7.0), new THREE.Vector3(-0.4, 2.8, -6.5), new THREE.Vector3(0.0, 1.7, CLIENT_Z + 6.2)]
   : [new THREE.Vector3(0.3, 1.8, 6.2), new THREE.Vector3(0.35, 1.7, -6.5), new THREE.Vector3(-0.5, 1.6, CLIENT_Z + 5.6)];
-const AIM = isSmall
+const AIM = embed
+  ? [new THREE.Vector3(0.2, 0.35, -9), new THREE.Vector3(0.1, 0.5, -22), new THREE.Vector3(-1.5, 1.0, CLIENT_Z - 0.4)]
+  : isSmall
   ? [new THREE.Vector3(1.3, -1.4, -1.5), new THREE.Vector3(1.5, -1.3, -15), new THREE.Vector3(0.0, 0.7, CLIENT_Z - 0.4)]
   : [new THREE.Vector3(-1.9, 0.5, -9), new THREE.Vector3(-1.7, 0.6, -22), new THREE.Vector3(-1.5, 1.0, CLIENT_Z - 0.4)];
 const camPos = new THREE.Vector3(), camAim = new THREE.Vector3(), tmp = new THREE.Vector3();
@@ -506,18 +514,31 @@ const depts = Array.from(document.querySelectorAll("#depts li"));
 const seatEl = document.getElementById("seatcount"), hint = document.getElementById("hint");
 const hud = { heard: document.getElementById("hud-heard"), veto: document.getElementById("hud-veto"), state: document.getElementById("hud-state") };
 const topBar = document.getElementById("top-bar");
+// Embedded, the walk is on a clock instead of the scrollbar: the floor wakes up department by department
+// over about forty seconds, convenes, and settles at your desk with the plan waiting. It never rewinds.
+let embedT0 = 0, embedHold = 0;
+function embedTarget(now) {
+  if (!embedT0) embedT0 = now;
+  const u = Math.min(1, (now - embedT0 - 900) / 42000);
+  if (u <= 0) return 0;
+  return 0.965 * (u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2);
+}
 function onScroll() {
-  const rect = section.getBoundingClientRect(), vh = window.innerHeight, span = rect.height - vh;
+  const rect = section.getBoundingClientRect(), vh = window.innerHeight;
+  if (embed) { running = rect.bottom > 0 && rect.top < vh && !document.hidden; return; }
+  const span = rect.height - vh;
   target = span > 0 ? Math.min(1, Math.max(0, -rect.top / span)) : 0;
   running = rect.bottom > 0 && rect.top < vh;
   const past = rect.bottom <= 40;
-  if (past !== topBar.classList.contains("light")) { topBar.classList.toggle("light", past); topBar.classList.toggle("dark", !past); }
-  hint.classList.toggle("off", target > 0.02);
+  if (topBar && past !== topBar.classList.contains("light")) { topBar.classList.toggle("light", past); topBar.classList.toggle("dark", !past); }
+  if (hint) hint.classList.toggle("off", target > 0.02);
 }
 window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+document.addEventListener("visibilitychange", onScroll);
 
 // ---------- labels: one seat named per department as it comes alive, plus your desk ----------
-const labelLayer = document.getElementById("labels");
+let labelLayer = cfg.labels || document.getElementById("labels");
+if (!labelLayer) { labelLayer = document.createElement("div"); labelLayer.className = "labels"; labelLayer.setAttribute("aria-hidden", "true"); stage.appendChild(labelLayer); }
 const labels = [];
 function makeLabel(text, sub) { const el = document.createElement("div"); el.className = "seat-label"; el.innerHTML = `<b>${text}</b>${sub ? `<i>${sub}</i>` : ""}`; labelLayer.appendChild(el); return el; }
 for (let d = 0; d < 7; d++) {
@@ -587,7 +608,8 @@ function frame(now) {
   if (!running && !firstFrame) return;
   if (!sizedW) { size(); if (!sizedW) return; } // nothing to draw into yet
   const dt = lastT ? Math.min(0.2, (now - lastT) / 1000) : 0.016; lastT = now;
-  p += (target - p) * (1 - Math.exp(-dt / 0.11));
+  if (embed) target = embedTarget(now);
+  p += (target - p) * (1 - Math.exp(-dt / (embed ? 0.6 : 0.11)));
   if (!Number.isFinite(p)) p = target;
   parX += (mouseX - parX) * (1 - Math.exp(-dt / 0.35)); parY += (mouseY - parY) * (1 - Math.exp(-dt / 0.35));
   const t = now / 1000;
@@ -651,15 +673,15 @@ function frame(now) {
   grade.uniforms.uTime.value = (t % 100) * 7;
 
   composer.render();
-  if (firstFrame) { firstFrame = false; poster.style.opacity = "0"; }
+  if (firstFrame) { firstFrame = false; if (poster) poster.style.opacity = "0"; stage.classList.add("gl-on"); }
 
   const live = SEATS.reduce((acc, n, d) => acc + (p >= T.deptOn(d) ? n : 0), 0);
-  if (live !== lastLive) { lastLive = live; seatEl.textContent = live; }
+  if (live !== lastLive) { lastLive = live; if (seatEl) seatEl.textContent = live; if (cfg.onSeats) cfg.onSeats(live, p); }
   for (const b of beats) { const on = p >= +b.dataset.from && p < +b.dataset.to; if (on !== b.classList.contains("on")) b.classList.toggle("on", on); }
   depts.forEach((el, d) => { const on = p >= T.deptOn(d); if (on !== el.classList.contains("on")) el.classList.toggle("on", on); });
   if (hud.heard) {
     const heard = Math.round(74 * smooth(T.convene[0], T.convene[1] - 0.04, p));
-    hud.heard.textContent = heard; hud.veto.textContent = heard > 0 ? "0" : "–";
+    hud.heard.textContent = heard; hud.veto.textContent = "0";
     hud.state.textContent = heard < 74 ? (heard ? "convening" : "tabled") : "no vetoes · goes to your desk";
   }
   const rc = copyRect();
