@@ -15,11 +15,12 @@
 <link rel="icon" href="/assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=a005bb24">
+<link rel="stylesheet" href="/assets/site.css?v=befe30ba">
 
 <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
 <script defer src="/assets/dither.js?v=aa7eaa27"></script>
 <script defer src="/assets/site.js?v=fbb4ad38"></script>
+<script defer src="/assets/fx.js?v=a86df8d4"></script>
 
 </head>
 <body class="">
@@ -62,25 +63,8 @@
     <div class="acts rv" style="--d:140ms"><form class="capsule" data-capture novalidate><label class="sr" for="hero-email">Your email</label><input id="hero-email" type="email" placeholder="Your email" autocomplete="email" inputmode="email"><button class="btn" type="submit">Request an account</button></form></div>
   </div>
   <div class="wrap wide">
-    <div class="window rv" style="--d:220ms"><div class="inner">
-      <div class="ui dk vg val-hero" data-loop="16000">
-        <div class="vh-top"><div><small>Validation gate</small><b><span data-tick="0:10:2200:200">0</span> tested · <span style="color:#EF7B6D">0 validated</span></b></div><span class="chip no">tradeable: none</span></div>
-        <table class="utable gate">
-          <thead><tr><th>Signal</th><th class="r">In sample</th><th class="r">Out of sample</th><th class="r">Buy-and-hold</th><th class="r">Deflated</th><th class="r">Verdict</th></tr></thead>
-          <tbody>
-            <tr data-at="300"><td>Momentum, 12-1</td><td class="r">1.21</td><td class="r">0.48</td><td class="r">0.62</td><td class="r">0.11</td><td class="r"><span class="chip no">fails</span></td></tr>
-            <tr data-at="500"><td>Earnings drift</td><td class="r">0.94</td><td class="r">0.51</td><td class="r">0.62</td><td class="r">0.17</td><td class="r"><span class="chip no">fails</span></td></tr>
-            <tr data-at="700"><td>News sentiment</td><td class="r">1.38</td><td class="r">0.33</td><td class="r">0.62</td><td class="r">0.04</td><td class="r"><span class="chip no">fails</span></td></tr>
-            <tr data-at="900"><td>Mean reversion, 5d</td><td class="r">0.87</td><td class="r">0.29</td><td class="r">0.62</td><td class="r">0.06</td><td class="r"><span class="chip no">fails</span></td></tr>
-            <tr data-at="1100"><td>Crypto trend</td><td class="r">1.52</td><td class="r">0.58</td><td class="r">0.61</td><td class="r">0.14</td><td class="r"><span class="chip no">fails</span></td></tr>
-            <tr data-at="1300"><td>Low volatility</td><td class="r">0.76</td><td class="r">0.57</td><td class="r">0.62</td><td class="r">0.21</td><td class="r"><span class="chip no">fails</span></td></tr>
-            <tr data-at="1500"><td>Quality tilt</td><td class="r">0.81</td><td class="r">0.55</td><td class="r">0.62</td><td class="r">0.19</td><td class="r"><span class="chip no">fails</span></td></tr>
-            <tr data-at="1700" class="more"><td colspan="6">Three more tested: sector rotation, short-term reversal, analyst revisions. All three fail the same way.</td></tr>
-          </tbody>
-        </table>
-        <div class="vh-foot" data-at="2600"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg> Sharpe ratios shown are illustrative of how the gate reads. The real ones are on your desk. The verdict is the same: none certified.</div>
-      </div>
-    </div><div class="glowfoot"></div></div>
+    <div class="window rv" style="--d:220ms"><div class="inner film-inner"><video class="film" data-film muted playsinline loop preload="metadata" poster="/media/validation-poster.jpg" aria-label="A short film: a signal that looked brilliant on the years it was fit to goes flat on data it never saw, buy-and-hold pulls ahead, and the count reads 0 of 10 validated."><source src="/media/validation.mp4" type="video/mp4"></video><button class="film-play" type="button" aria-label="Play the film" hidden><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></button></div><div class="glowfoot"></div></div>
+    <p class="film-note rv">The Sharpe ratios in the film show how the gate reads, not live results. The verdict is real: no signal has been certified.</p>
   </div>
 </section>
 <div class="band up" data-band data-from="0.02" data-to="1" data-nav="up" aria-hidden="true"></div>
@@ -132,6 +116,7 @@
       <div><a href="/" aria-label="Teloson home" style="display:inline-block"><svg class="lockup" role="img" aria-label="Teloson"><use href="#tl-lockup"/></svg></a><p class="tag">Private trading floors, one client at a time. Built in New York, run on your Mac.</p></div>
       <div class="col"><h6>Product</h6><a href="/product/floor/">The Floor</a><a href="/product/approvals/">Approvals</a><a href="/product/limits/">Risk limits</a><a href="/product/practice/">Practice desk</a><a href="/product/alerts/">Alerts</a><a href="/product/research/">Research chat</a><a href="/product/audit/">Audit trail</a><a href="/product/validation/">Validation</a></div><div class="col"><h6>Who it's for</h6><a href="/for/busy-professionals/">People with day jobs</a><a href="/for/international/">Clients outside the US</a><a href="/for/crypto/">Stocks and crypto, one book</a><a href="/for/first-account/">A first real account</a><a href="/for/long-term/">Long-term holders</a><a href="/for/skeptics/">Skeptics of trading bots</a></div><div class="col"><h6>Resources</h6><a href="/integrations/">Integrations</a><a href="/docs/">Docs</a><a href="/pricing/">Pricing</a><a href="/security/">Security</a><a href="/blog/">Blog</a><a href="/live/">The floor in 3D</a></div><div class="col"><h6>Company</h6><a href="/company/">About</a><a href="/careers/">Careers</a><a href="/request/">Request an account</a><a href="/desk/">Client sign in</a><a href="/legal/terms/">Terms</a><a href="/legal/privacy/">Privacy</a><a href="/legal/risk/">Risk disclosure</a></div>
     </div>
+    <div class="bigmark" data-bigmark aria-hidden="true"><svg class="bm-line" viewBox="0 0 328.42 80.98" preserveAspectRatio="xMidYMid meet"><use href="#tl-lockup"/></svg><canvas></canvas></div>
     <p class="legal">Teloson is software and setup, not investment advice. Teloson does not manage your money and never holds it. Its own validation harness has certified no trading signal as statistically proven; past performance, simulated or real, is no guarantee of future results. Losses are possible at all times. Only put in capital you can afford to lose entirely.</p>
     <div class="bottom"><span>&copy; <span data-year>2026</span> Teloson. New York.</span><span class="r"><span>macOS 14 or later</span><span>Approve-first, in code</span></span></div>
   </div>

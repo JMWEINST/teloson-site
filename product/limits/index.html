@@ -15,11 +15,12 @@
 <link rel="icon" href="/assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=a005bb24">
+<link rel="stylesheet" href="/assets/site.css?v=befe30ba">
 
 <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
 <script defer src="/assets/dither.js?v=aa7eaa27"></script>
 <script defer src="/assets/site.js?v=fbb4ad38"></script>
+<script defer src="/assets/fx.js?v=a86df8d4"></script>
 
 </head>
 <body class="">
@@ -62,35 +63,7 @@
     <div class="acts rv" style="--d:140ms"><form class="capsule" data-capture novalidate><label class="sr" for="hero-email">Your email</label><input id="hero-email" type="email" placeholder="Your email" autocomplete="email" inputmode="email"><button class="btn" type="submit">Request an account</button></form></div>
   </div>
   <div class="wrap wide">
-    <div class="window rv" style="--d:220ms"><div class="inner">
-      <div class="ui dk vg lim-hero" data-loop="15000">
-        <div class="lh-doc">
-          <div class="doc">
-            <div class="dhd"><svg viewBox="0 0 99.42 80.98" aria-hidden="true"><use href="#tl-mark"/></svg><span>Teloson · Confidential</span><span class="pg">page 3 of 6</span></div>
-            <h4>Section C. Your limits</h4>
-            <div class="q"><span>Emergency brake</span><span class="opts"><i>5%</i><i class="x">10%</i><i>15%</i><i>20%</i></span></div>
-            <div class="q"><span>Position cap</span><span class="opts"><i>3%</i><i class="x">5%</i><i>10%</i></span></div>
-            <div class="q"><span>Bad-day halt</span><span class="opts"><i>2%</i><i class="x">3%</i><i>5%</i></span></div>
-            <div class="q"><span>Exit flag</span><span class="opts"><i>5%</i><i class="x">8%</i><i>12%</i></span></div>
-            <div class="q"><span>Losing streak</span><span class="opts"><i class="x">3 then 5</i><i>5 then 8</i></span></div>
-            <div class="q"><span>Appetite</span><span class="opts"><i class="x">40 of 100</i></span></div>
-            <div class="sig"><span class="sigline">J. Weinstein</span><span>Client · 14 Oct</span><span class="sigline">Teloson</span><span>Countersigned · 15 Oct</span></div>
-          </div>
-        </div>
-        <div class="lh-run">
-          <div class="card">
-            <div class="hd">Running now <span class="sub">checked 10:12:27</span></div>
-            <div class="lim" data-cls="400:scan;1200:-scan"><span class="n">Emergency brake</span><span class="v">−0.4% of 10%</span><span class="m"><i style="--w:4%"></i></span></div>
-            <div class="lim" data-cls="1200:scan;2000:-scan"><span class="n">Position cap</span><span class="v">2.1% of 5%</span><span class="m"><i class="warm" style="--w:42%"></i></span></div>
-            <div class="lim" data-cls="2000:scan;2800:-scan"><span class="n">Bad-day halt</span><span class="v">−0.4% of 3%</span><span class="m"><i style="--w:13%"></i></span></div>
-            <div class="lim" data-cls="2800:scan;3600:-scan"><span class="n">Exit flag</span><span class="v">−1.2% of 8%</span><span class="m"><i style="--w:15%"></i></span></div>
-            <div class="lim" data-cls="3600:scan;4400:-scan"><span class="n">Losing streak</span><span class="v">1 of 3</span><span class="m"><i style="--w:33%"></i></span></div>
-            <div class="lim" data-cls="4400:scan;5200:-scan"><span class="n">Orders and dollars today</span><span class="v">3 of 20 · $5,240</span><span class="m"><i style="--w:21%"></i></span></div>
-            <div class="reject grow" data-at="6200" style="--mh:120px"><div class="rj"><span class="av sm d-risk">LE</span><div><div class="who"><b>Leo</b><span>Preflight</span><span class="chip no">rejected</span></div><div class="txt">Plan 0420 asks for 6.2% of the book. Your cap is 5%. It never reaches the broker.</div></div></div></div>
-          </div>
-        </div>
-      </div>
-    </div><div class="glowfoot"></div></div>
+    <div class="window rv" style="--d:220ms"><div class="inner film-inner"><video class="film" data-film muted playsinline loop preload="metadata" poster="/media/limits-poster.jpg" aria-label="A short film: you pick your limits on the signed questionnaire, they run as rules, and an order over your position cap is rejected before it reaches your broker."><source src="/media/limits.mp4" type="video/mp4"></video><button class="film-play" type="button" aria-label="Play the film" hidden><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></button></div><div class="glowfoot"></div></div>
   </div>
 </section>
 <div class="band up" data-band data-from="0.02" data-to="1" data-nav="up" aria-hidden="true"></div>
@@ -180,6 +153,7 @@
       <div><a href="/" aria-label="Teloson home" style="display:inline-block"><svg class="lockup" role="img" aria-label="Teloson"><use href="#tl-lockup"/></svg></a><p class="tag">Private trading floors, one client at a time. Built in New York, run on your Mac.</p></div>
       <div class="col"><h6>Product</h6><a href="/product/floor/">The Floor</a><a href="/product/approvals/">Approvals</a><a href="/product/limits/">Risk limits</a><a href="/product/practice/">Practice desk</a><a href="/product/alerts/">Alerts</a><a href="/product/research/">Research chat</a><a href="/product/audit/">Audit trail</a><a href="/product/validation/">Validation</a></div><div class="col"><h6>Who it's for</h6><a href="/for/busy-professionals/">People with day jobs</a><a href="/for/international/">Clients outside the US</a><a href="/for/crypto/">Stocks and crypto, one book</a><a href="/for/first-account/">A first real account</a><a href="/for/long-term/">Long-term holders</a><a href="/for/skeptics/">Skeptics of trading bots</a></div><div class="col"><h6>Resources</h6><a href="/integrations/">Integrations</a><a href="/docs/">Docs</a><a href="/pricing/">Pricing</a><a href="/security/">Security</a><a href="/blog/">Blog</a><a href="/live/">The floor in 3D</a></div><div class="col"><h6>Company</h6><a href="/company/">About</a><a href="/careers/">Careers</a><a href="/request/">Request an account</a><a href="/desk/">Client sign in</a><a href="/legal/terms/">Terms</a><a href="/legal/privacy/">Privacy</a><a href="/legal/risk/">Risk disclosure</a></div>
     </div>
+    <div class="bigmark" data-bigmark aria-hidden="true"><svg class="bm-line" viewBox="0 0 328.42 80.98" preserveAspectRatio="xMidYMid meet"><use href="#tl-lockup"/></svg><canvas></canvas></div>
     <p class="legal">Teloson is software and setup, not investment advice. Teloson does not manage your money and never holds it. Its own validation harness has certified no trading signal as statistically proven; past performance, simulated or real, is no guarantee of future results. Losses are possible at all times. Only put in capital you can afford to lose entirely.</p>
     <div class="bottom"><span>&copy; <span data-year>2026</span> Teloson. New York.</span><span class="r"><span>macOS 14 or later</span><span>Approve-first, in code</span></span></div>
   </div>
