@@ -60,6 +60,20 @@
   /* ---------- the vignette player ---------- */
   function fmtNum(v, el){ var dec = +(el.dataset.dec || 0), pre = el.dataset.pre || "", suf = el.dataset.suf || "";
     return pre + v.toLocaleString("en-US", { minimumFractionDigits: dec, maximumFractionDigits: dec }) + suf; }
+  /* rolling digits: every digit is a column that spins into place, like a real trading app */
+  function rollPrep(n, from, to){
+    var a = fmtNum(from, n), b = fmtNum(to, n);
+    if(a.replace(/\d/g, "0").length !== b.replace(/\d/g, "0").length) a = b.replace(/\d/g, "0");
+    var h = "";
+    for(var i = 0; i < b.length; i++){ var ch = b.charAt(i), c0 = a.charAt(i);
+      if(/\d/.test(ch)){ var col = ""; for(var k = 0; k < 10; k++) col += "<i>" + k + "</i>"; h += '<span class="od" data-to="' + ch + '" data-from="' + (/\d/.test(c0) ? c0 : 0) + '"><span class="odc" style="transform:translateY(-' + (/\d/.test(c0) ? c0 : 0) + '0%)">' + col + "</span></span>"; }
+      else h += '<span class="os">' + ch + "</span>"; }
+    n.innerHTML = h; n.setAttribute("aria-label", b);
+  }
+  function rollGo(n, dur){
+    void n.offsetHeight;
+    $$(".od", n).forEach(function(o, i){ var c = o.firstChild; c.style.transition = "transform " + Math.max(600, dur * .75) + "ms cubic-bezier(.25,1.25,.4,1) " + (i * 45) + "ms"; c.style.transform = "translateY(-" + o.dataset.to + "0%)"; });
+  }
   function Player(root){
     this.root = root; this.timers = []; this.running = false; this.visible = false; this.pending = false;
     this.loop = +(root.dataset.loop || 0);
@@ -109,7 +123,7 @@
       self.later(at, function(){ k.split(" ").forEach(function(c){ if(c.charAt(0) === "-") n.classList.remove(c.slice(1)); else n.classList.add(c); }); if(tmp) self.later(220, function(){ k.split(" ").forEach(function(c){ n.classList.remove(c); }); }); }); }); });
     $$("[data-swap]", r).forEach(function(n){ n.dataset.swap.split("|").forEach(function(p){ var m = p.match(/^(\d+):([\s\S]*)$/); if(m) self.later(+m[1], function(){ n.innerHTML = m[2]; }); }); });
     $$("[data-tick]", r).forEach(function(n){ var a = n.dataset.tick.split(":"), from = +a[0], to = +a[1], dur = +(a[2] || 1200), at = +(a[3] || 0);
-      self.later(at, function(){ var t0 = performance.now(); (function f(now){ var t = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - t, 3); n.textContent = fmtNum(from + (to - from) * e, n); if(t < 1) requestAnimationFrame(f); })(t0); }); });
+      rollPrep(n, from, to); self.later(at, function(){ rollGo(n, dur); }); });
     $$("[data-w]", r).forEach(function(n){ self.later(+(n.dataset.wAt || 300), function(){ n.style.width = n.dataset.w; }); });
     if(this.loop) this.later(this.loop, function(){ self.running = false; if(self.visible && !d.hidden) self.run(); else self.pending = true; });
   };

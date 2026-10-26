@@ -15,11 +15,11 @@
 <link rel="icon" href="/assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=befe30ba">
+<link rel="stylesheet" href="/assets/site.css?v=a8c47a90">
 
 <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
 <script defer src="/assets/dither.js?v=aa7eaa27"></script>
-<script defer src="/assets/site.js?v=fbb4ad38"></script>
+<script defer src="/assets/site.js?v=eb45ad7d"></script>
 <script defer src="/assets/fx.js?v=a86df8d4"></script>
 
 </head>
@@ -63,7 +63,7 @@
     <div class="acts rv" style="--d:140ms"><form class="capsule" data-capture novalidate><label class="sr" for="hero-email">Your email</label><input id="hero-email" type="email" placeholder="Your email" autocomplete="email" inputmode="email"><button class="btn" type="submit">Request an account</button></form></div>
   </div>
   <div class="wrap wide">
-    <div class="window rv" style="--d:220ms"><div class="inner film-inner"><video class="film" data-film muted playsinline loop preload="metadata" poster="/media/limits-poster.jpg" aria-label="A short film: you pick your limits on the signed questionnaire, they run as rules, and an order over your position cap is rejected before it reaches your broker."><source src="/media/limits.mp4" type="video/mp4"></video><button class="film-play" type="button" aria-label="Play the film" hidden><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></button></div><div class="glowfoot"></div></div>
+    <div class="window rv" style="--d:220ms"><div class="inner film-inner"><video class="film" data-film muted playsinline loop preload="metadata" poster="/media/limits-poster.jpg?v=bb5a78a3" aria-label="A short film: you pick your limits on the signed questionnaire, they run as rules, and an order over your position cap is rejected before it reaches your broker."><source src="/media/limits.mp4?v=f92356d9" type="video/mp4"></video><button class="film-play" type="button" aria-label="Play the film" hidden><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></button></div><div class="glowfoot"></div></div>
   </div>
 </section>
 <div class="band up" data-band data-from="0.02" data-to="1" data-nav="up" aria-hidden="true"></div>
@@ -93,7 +93,7 @@
         <div class="fvis halo rv" style="--d:100ms"><div class="ui vg card haltcard" data-loop="12000">
           <div class="halt" data-at="200"><span class="hi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.86 2h8.28L22 7.86v8.28L16.14 22H7.86L2 16.14V7.86z"/><path d="M8 12h8"/></svg></span><div><b>The floor is halted</b><p>Emergency brake reached at −10.0%. Nothing was sold. Only you can release it.</p></div></div>
           <div class="set" data-at="900"><span class="sl">Type RELEASE to confirm<small>The release is logged with your name and the time.</small></span><span class="inp mono" data-type="RELEASE" data-speed="110" data-type-at="0"></span></div>
-          <div class="set" data-at="3000"><span class="chip ok">released</span><span class="sl">Trading resumes at the next check. Your brake stays at 10%.</span></div>
+          <div class="set" data-at="3000"><span class="chip ok">Released</span><span class="sl">Trading resumes at the next check. Your brake stays at 10%.</span></div>
         </div></div>
       </div>
       <div class="frow">
@@ -101,8 +101,8 @@
         <div class="fvis halo rv" style="--d:100ms"><div class="ui vg card" data-loop="0">
           <div class="hd">Limit history <span class="sub">position cap</span></div>
           <table class="utable"><thead><tr><th>When</th><th>Value</th><th>By</th><th class="r">Status</th></tr></thead><tbody>
-            <tr data-at="100"><td class="t">14 Oct</td><td>5%</td><td>Signed in questionnaire</td><td class="r"><span class="chip gy">signed</span></td></tr>
-            <tr data-at="500"><td class="t">22 Oct</td><td>3%</td><td>Requested by you</td><td class="r"><span class="chip ok">running</span></td></tr>
+            <tr data-at="100"><td class="t">14 Oct</td><td>5%</td><td>Signed in questionnaire</td><td class="r"><span class="chip gy">Signed</span></td></tr>
+            <tr data-at="500"><td class="t">22 Oct</td><td>3%</td><td>Requested by you</td><td class="r"><span class="chip ok">Running</span></td></tr>
           </tbody></table>
           <div class="qnote" style="margin:0 14px 14px" data-at="900">Both values stay on the record. The desk runs on the newer one.</div>
         </div></div>
@@ -128,8 +128,8 @@
         <div class="lt-pane"><div class="ui vg card" data-manual><div class="hd">Emergency brake <span class="sub">10%</span></div><div class="lim"><span class="n">Account from high-water mark</span><span class="v" data-swap="1400:−5.0% of 10%">−0.4% of 10%</span><span class="m"><i data-w="50%" data-w0="4%" data-w-at="600"></i></span></div><div class="noti" data-at="1800" style="margin:12px"><span class="ai wa"><img class="mono" src="/assets/logos/whatsapp.svg" alt=""></span><div><div class="h"><b>WhatsApp</b><span>now</span></div><div class="tt">Halfway to your brake</div><div class="bd">Book down 5.0% from its high. Nothing halted yet.</div></div></div></div></div>
         <div class="lt-pane"><div class="ui vg card" data-manual><div class="hd">Position cap <span class="sub">5%</span></div><div class="cv2" data-at="100"><b>NVDA</b><span class="m"><i style="width:42%"></i></span><em>2.1%</em></div><div class="cv2" data-at="300"><b>MSFT</b><span class="m"><i style="width:68%"></i></span><em>3.4%</em></div><div class="cv2" data-at="500"><b>XOM</b><span class="m"><i class="warm" style="width:92%"></i></span><em>4.6%</em></div><div class="cv2" data-at="700"><b>AAPL</b><span class="m"><i style="width:30%"></i></span><em>1.5%</em></div></div></div>
         <div class="lt-pane"><div class="ui vg card" data-manual><div class="halt" data-at="200"><span class="hi"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.86 2h8.28L22 7.86v8.28L16.14 22H7.86L2 16.14V7.86z"/><path d="M8 12h8"/></svg></span><div><b>Bad-day halt at 3%</b><p>Trading stops for the rest of the session. It waits for the next New York open.</p></div></div></div></div>
-        <div class="lt-pane"><div class="ui vg card" data-manual><div class="hd">Exit flag <span class="sub">8%</span></div><div class="msg" data-at="300"><span class="av d-risk">GI</span><div><div class="who"><b>Gia</b><span>Crypto Risk</span><span class="chip warn">flag</span></div><div class="txt">SOL is down 8.4% from entry. Flagged for exit. On your real account this is a flag, not a sale. You decide.</div></div></div></div></div>
-        <div class="lt-pane"><div class="ui vg card" data-manual><div class="hd">Losing streak <span class="sub">3 then 5</span></div><div class="set" data-at="100"><span class="chip no">loss</span><span class="sl">Plan 0402 closed −1.1%</span></div><div class="set" data-at="400"><span class="chip no">loss</span><span class="sl">Plan 0407 closed −0.6%</span></div><div class="set" data-at="700"><span class="chip no">loss</span><span class="sl">Plan 0411 closed −0.9%</span></div><div class="set" data-at="1300"><span class="chip warn">brake</span><span class="sl">Three in a row. New plans are half size until a winner.</span></div></div></div>
+        <div class="lt-pane"><div class="ui vg card" data-manual><div class="hd">Exit flag <span class="sub">8%</span></div><div class="msg" data-at="300"><span class="av d-risk">GI</span><div><div class="who"><b>Gia</b><span>Crypto Risk</span><span class="chip warn">Flag</span></div><div class="txt">SOL is down 8.4% from entry. Flagged for exit. On your real account this is a flag, not a sale. You decide.</div></div></div></div></div>
+        <div class="lt-pane"><div class="ui vg card" data-manual><div class="hd">Losing streak <span class="sub">3 then 5</span></div><div class="set" data-at="100"><span class="chip no">Loss</span><span class="sl">Plan 0402 closed −1.1%</span></div><div class="set" data-at="400"><span class="chip no">Loss</span><span class="sl">Plan 0407 closed −0.6%</span></div><div class="set" data-at="700"><span class="chip no">Loss</span><span class="sl">Plan 0411 closed −0.9%</span></div><div class="set" data-at="1300"><span class="chip warn">Brake</span><span class="sl">Three in a row. New plans are half size until a winner.</span></div></div></div>
       </div>
     </div>
   </div>
